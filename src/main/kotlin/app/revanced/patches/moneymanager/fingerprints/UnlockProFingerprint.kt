@@ -2,8 +2,8 @@ package app.revanced.patches.moneymanager.fingerprints
 
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import org.jf.dexlib2.AccessFlags
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
 object UnlockProFingerprint : MethodFingerprint(
     "Z",
@@ -13,7 +13,7 @@ object UnlockProFingerprint : MethodFingerprint(
         Opcode.IGET_BOOLEAN,
         Opcode.RETURN
     ),
-    customFingerprint = { methodDef ->
+    customFingerprint = { methodDef, _ ->
         methodDef.definingClass.endsWith("MainActivity;")
     }
 )

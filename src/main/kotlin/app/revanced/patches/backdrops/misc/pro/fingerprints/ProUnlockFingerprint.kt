@@ -1,7 +1,7 @@
 package app.revanced.patches.backdrops.misc.pro.fingerprints
 
 import app.revanced.patcher.fingerprint.method.impl.MethodFingerprint
-import org.jf.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.Opcode
 
 object ProUnlockFingerprint : MethodFingerprint(
     opcodes = listOf(
@@ -11,5 +11,8 @@ object ProUnlockFingerprint : MethodFingerprint(
         Opcode.MOVE_RESULT,
         Opcode.IF_EQZ
     ),
-    customFingerprint = { it.definingClass == "Lcom/backdrops/wallpapers/data/local/DatabaseHandlerIAB;" && it.name == "lambda\$existPurchase\$0" }
+    customFingerprint = { methodDef, _ ->
+        methodDef.definingClass == "Lcom/backdrops/wallpapers/data/local/DatabaseHandlerIAB;"
+                && methodDef.name == "lambda\$existPurchase\$0"
+    }
 )
